@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "26425266030",
+    "project_id": "newtaskblockroutepage",
+    "storage_bucket": "newtaskblockroutepage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26425266030:android:4a2d68c5ba962114963b7f",
+        "android_client_info": {
+          "package_name": "com.example.new_task_bloc_routpage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0pSYBUlHmB1axTDl8ZwcWmzfmXVDrT1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
