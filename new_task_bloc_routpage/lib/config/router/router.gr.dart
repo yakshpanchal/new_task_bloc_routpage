@@ -12,15 +12,17 @@ import 'package:auto_route/auto_route.dart' as _i9;
 import 'package:new_task_bloc_routpage/src/authentication/presenatation/CheckisLoginOrNot.dart'
     as _i1;
 import 'package:new_task_bloc_routpage/src/authentication/presenatation/Login.dart'
-    as _i2;
+    as _i3;
 import 'package:new_task_bloc_routpage/src/authentication/presenatation/SignUp.dart'
     as _i8;
+import 'package:new_task_bloc_routpage/src/DashBoard/presentation/DashBoard.dart'
+    as _i2;
 import 'package:new_task_bloc_routpage/src/HomeScreen/presentation/main_screen.dart'
-    as _i3;
-import 'package:new_task_bloc_routpage/src/Profile/presentation/Profile.dart'
     as _i4;
-import 'package:new_task_bloc_routpage/src/PropertyRequest/presentation/pages/PropertyRequest.dart'
+import 'package:new_task_bloc_routpage/src/Profile/presentation/Profile.dart'
     as _i5;
+import 'package:new_task_bloc_routpage/src/PropertyRequest/presentation/pages/PropertyRequest.dart'
+    as _i6;
 import 'package:new_task_bloc_routpage/src/ShowUserRequests/presentation/pages/ShowUserPropertyRequests.dart'
     as _i7;
 
@@ -35,28 +37,34 @@ abstract class $AppRouter extends _i9.RootStackRouter {
         child: const _i1.CheckLoginStatus(),
       );
     },
+    DashBoard.name: (routeData) {
+      return _i9.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i2.DashBoard(),
+      );
+    },
     Login.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.Login(),
+        child: const _i3.Login(),
       );
     },
     MainRoute.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.MainScreen(),
+        child: const _i4.MainScreen(),
       );
     },
     Profile.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.Profile(),
+        child: const _i5.Profile(),
       );
     },
     PropertyRequest.name: (routeData) {
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.PropertyRequest(),
+        child: const _i6.PropertyRequest(),
       );
     },
     ShowUserRequest.name: (routeData) {
@@ -89,7 +97,21 @@ class CheckLoginStatus extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.Login]
+/// [_i2.DashBoard]
+class DashBoard extends _i9.PageRouteInfo<void> {
+  const DashBoard({List<_i9.PageRouteInfo>? children})
+      : super(
+          DashBoard.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DashBoard';
+
+  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.Login]
 class Login extends _i9.PageRouteInfo<void> {
   const Login({List<_i9.PageRouteInfo>? children})
       : super(
@@ -103,7 +125,7 @@ class Login extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.MainScreen]
+/// [_i4.MainScreen]
 class MainRoute extends _i9.PageRouteInfo<void> {
   const MainRoute({List<_i9.PageRouteInfo>? children})
       : super(
@@ -117,7 +139,7 @@ class MainRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.Profile]
+/// [_i5.Profile]
 class Profile extends _i9.PageRouteInfo<void> {
   const Profile({List<_i9.PageRouteInfo>? children})
       : super(
@@ -131,7 +153,7 @@ class Profile extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.PropertyRequest]
+/// [_i6.PropertyRequest]
 class PropertyRequest extends _i9.PageRouteInfo<void> {
   const PropertyRequest({List<_i9.PageRouteInfo>? children})
       : super(
@@ -140,20 +162,6 @@ class PropertyRequest extends _i9.PageRouteInfo<void> {
         );
 
   static const String name = 'PropertyRequest';
-
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i6.ScreenB]
-class RouteB extends _i9.PageRouteInfo<void> {
-  const RouteB({List<_i9.PageRouteInfo>? children})
-      : super(
-          RouteB.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'RouteB';
 
   static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
 }

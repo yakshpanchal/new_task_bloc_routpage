@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +18,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
-        PropertyRequest(),
+        DashBoard(),
         ShowUserRequest(),
+        PropertyRequest(),
         Profile(),
       ],
       builder: (context, child) {
@@ -29,8 +29,9 @@ class _MainScreenState extends State<MainScreen> {
           body: child,
           bottomNavigationBar: ConvexAppBar(
             items: const [
-              TabItem(icon: Icons.request_page, title: 'property'),
-              TabItem(icon: Icons.home, title: 'Home'),
+              TabItem(icon: Icons.dashboard, title: 'Dashboard'),
+              TabItem(icon: Icons.request_page, title: 'Your Request'),
+              TabItem(icon: Icons.add_box, title: 'Request'),
               TabItem(icon: Icons.person, title: 'Account'),
             ],
             height: 60,
