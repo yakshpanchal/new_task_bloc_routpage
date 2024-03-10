@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csc_picker/csc_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_task_bloc_routpage/config/router/router.gr.dart';
 import 'package:new_task_bloc_routpage/src/PropertyRequest/data/data-Source/SeprateData.dart';
 
 @RoutePage()
@@ -28,6 +29,7 @@ class _PropertyRequestState extends State<PropertyRequest> {
   bool _isChecked1 = false;
   bool _isChecked2 = false;
   bool _isUploading = false;
+  bool _isUploadingnewProperty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,18 @@ class _PropertyRequestState extends State<PropertyRequest> {
           'Property Request details',
           style: TextStyle(color: Colors.white),
         ),
+        actions: <Widget>[
+          OutlinedButton.icon(
+            onPressed: () {
+              AutoRouter.of(context).push(const ShowUserRequest());
+            },
+            icon: const Icon(Icons.request_page, color: Colors.white),
+            label: const Text(
+              'See Your Request',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
         backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(
@@ -173,7 +187,7 @@ class _PropertyRequestState extends State<PropertyRequest> {
               RangeSlider(
                 values: _currentRangeValues,
                 min: 0,
-                max: 100000, // Adjust max value according to your requirement
+                max: 1000000, // Adjust max value according to your requirement
                 divisions: 100,
                 onChanged: (RangeValues values) {
                   setState(() {
@@ -283,15 +297,47 @@ class _PropertyRequestState extends State<PropertyRequest> {
                   const Text('Can Property Owners Contact on WhatsApp ?'),
                 ],
               ),
-              Center(
-                child: Container(
-                  child: _isUploading
-                      ? const CircularProgressIndicator()
-                      : ElevatedButton(
-                          onPressed: _submitPropertyRequest,
-                          child: const Text('Submit Request'),
-                        ),
-                ),
+              const SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    child: _isUploading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            style: ButtonStyle(
+                              padding:
+                                  MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 12), // Padding
+                              ),
+                            ),
+                            onPressed: _submitPropertyRequest,
+                            child: const Text('Submit Request'),
+                          ),
+                  ),
+                  Container(
+                    child: _isUploadingnewProperty
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.green), // Background color
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white), // Text color
+                              padding:
+                                  MaterialStateProperty.all<EdgeInsetsGeometry>(
+                                const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 12), // Padding
+                              ),
+                            ),
+                            onPressed: _AddNewAvailableProperty,
+                            child: const Text('Add New Property'),
+                          ),
+                  ),
+                ],
               ),
               const SizedBox(height: 100),
             ],
@@ -386,8 +432,7 @@ class _PropertyRequestState extends State<PropertyRequest> {
               ),
               const SizedBox(
                   height: 10), // Add some spacing between image and text
-              const Text(
-                  "Your property request has been submitted successfully."),
+              const Text("Your request has been submitted successfully."),
             ],
           ),
           actions: [
@@ -414,5 +459,67 @@ class _PropertyRequestState extends State<PropertyRequest> {
         );
       },
     );
+  }
+
+  void _AddNewAvailableProperty() {
+    // Check if any required field is not filled
+    if (_selectedCategoryIndex == -1 ||
+        _selectedTypeIndex == -1 ||
+        _selecttransectionTypeIndex == -1 ||
+        selectedCountry == null ||
+        selectedState == null ||
+        selectedCity == null) {
+      // Show a snack bar indicating that all details are required
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all the details')),
+      );
+      return; // Exit the method without submitting the request
+    }
+
+    // Set the state to indicate that data upload is in progress
+    setState(() {
+      _isUploadingnewProperty = true;
+    });
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    // Upload data to Firebase Firestore
+    firestore
+        .collection('AvailablePropertys')
+        .doc(DateTime.now().millisecondsSinceEpoch.toString())
+        .set({
+      'category': SatprateData.categories[_selectedCategoryIndex].name,
+      'type': SatprateData.types[_selectedTypeIndex].name,
+      'transactionType':
+          SatprateData.transactionTypes[_selecttransectionTypeIndex].name,
+      'minPrice': _currentRangeValues.start.round(),
+      'maxPrice': _currentRangeValues.end.round(),
+      'country': selectedCountry,
+      'state': selectedState,
+      'city': selectedCity,
+      'contactMobile': _isChecked1,
+      'contactWhatsApp': _isChecked2,
+      // Add more fields as needed
+    }).then((_) {
+      // Once upload is completed, set the state to indicate that upload is finished
+      setState(() {
+        _isUploadingnewProperty = false;
+      });
+
+      // Show a popup screen indicating successful submission
+      _showSubmissionDialogAndClearForm(context);
+    }).catchError((error) {
+      // Handle errors
+      print("Failed to submit property request: $error");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to submit property request')),
+      );
+
+      // Reset the state to indicate that upload is finished (in case of error)
+      setState(() {
+        _isUploadingnewProperty = false;
+      });
+    });
   }
 }

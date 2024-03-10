@@ -19,7 +19,6 @@ class _MainScreenState extends State<MainScreen> {
     return AutoTabsRouter(
       routes: const [
         DashBoard(),
-        ShowUserRequest(),
         PropertyRequest(),
         Profile(),
       ],
@@ -30,7 +29,6 @@ class _MainScreenState extends State<MainScreen> {
           bottomNavigationBar: ConvexAppBar(
             items: const [
               TabItem(icon: Icons.dashboard, title: 'Dashboard'),
-              TabItem(icon: Icons.request_page, title: 'Your Request'),
               TabItem(icon: Icons.add_box, title: 'Request'),
               TabItem(icon: Icons.person, title: 'Account'),
             ],
