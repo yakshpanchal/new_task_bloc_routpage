@@ -55,23 +55,19 @@ class FetchAvilablePropertys extends StatelessWidget {
                 );
               },
               child: Card(
-                elevation: 4,
+                // elevation: 4,
                 child: Stack(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(5),
                       // height: 100,
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black, // Choose your border color
-                          width: 2, // Adjust the border width as needed
+                        borderRadius: BorderRadius.circular(
+                            5), // Adjust the border radius according to your needs
+                        image: DecorationImage(
+                          image: AssetImage(imagePath),
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                      child: Image.asset(
-                        imagePath, // Replace 'assets/image.jpg' with your actual asset path
-                        fit: BoxFit.cover, // Adjust the fit as needed
-                        width: double.infinity,
-                        height: double.infinity,
                       ),
                     ),
                     Positioned(
@@ -83,7 +79,7 @@ class FetchAvilablePropertys extends StatelessWidget {
                         color: Colors.black.withOpacity(
                             0.5), // Semi-transparent black background for better readability
                         child: Text(
-                          '${data['category']} , ${data['type']} , ${data['transactionType']} , ${data['country']} , ',
+                          '${data['category']} , ${data['type']} , ${data['transactionType']}',
                           style: const TextStyle(
                             color: Colors.white, // Text color
                             fontSize: 10, // Adjust font size as needed
