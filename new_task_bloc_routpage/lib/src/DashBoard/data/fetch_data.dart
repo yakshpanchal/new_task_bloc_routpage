@@ -83,10 +83,10 @@ class FetchAvilablePropertys extends StatelessWidget {
                         color: Colors.black.withOpacity(
                             0.5), // Semi-transparent black background for better readability
                         child: Text(
-                          '${data['category']} , ${data['type']} , ${data['transactionType']}',
+                          '${data['category']} , ${data['type']} , ${data['transactionType']} , ${data['country']} , ',
                           style: const TextStyle(
                             color: Colors.white, // Text color
-                            fontSize: 16, // Adjust font size as needed
+                            fontSize: 10, // Adjust font size as needed
                           ),
                         ),
                       ),
