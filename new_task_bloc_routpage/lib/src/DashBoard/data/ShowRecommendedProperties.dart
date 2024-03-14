@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class ShowRecommendedProperties extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150, // Adjust the height according to your needs
+      height: 180, // Adjust the height according to your needs
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
@@ -49,7 +50,6 @@ class ShowRecommendedProperties extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: SizedBox(
-                              // width: 300,
                               child: Row(
                                 children: [
                                   Container(
@@ -107,8 +107,37 @@ class ShowRecommendedProperties extends StatelessWidget {
                                         Text(
                                           '${data['maxPrice']}/month',
                                           style: const TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 10,
                                           ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            IconButton(
+                                              padding: const EdgeInsets.all(0),
+                                              icon: const SizedBox(
+                                                  width: 25,
+                                                  height: 25,
+                                                  child: Icon(Icons.phone)),
+                                              onPressed: () {
+                                                // Handle contact button press
+                                              },
+                                            ),
+                                            IconButton(
+                                              padding: const EdgeInsets.all(0),
+                                              icon: SizedBox(
+                                                width: 25,
+                                                height: 25,
+                                                child: Image.asset(
+                                                    'assets/images/WhatsApp.png'),
+                                              ),
+                                              onPressed: () {
+                                                // Handle contact button press
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -117,22 +146,6 @@ class ShowRecommendedProperties extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // Positioned(
-                          //   bottom: 0,
-                          //   left: 0,
-                          //   right: 0,
-                          //   child: Container(
-                          //     padding: const EdgeInsets.all(8),
-                          //     color: Colors.black.withOpacity(0.5),
-                          //     child: Text(
-                          //       '${data['category']} , ${data['type']} , ${data['transactionType']} , ${data['country']} , ',
-                          //       style: const TextStyle(
-                          //         color: Colors.white,
-                          //         fontSize: 10,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
