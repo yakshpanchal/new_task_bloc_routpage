@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:new_task_bloc_routpage/src/DashBoard/data/ShowRecommendedProperties.dart';
-import 'package:new_task_bloc_routpage/src/DashBoard/data/fetch_data.dart';
+import 'package:new_task_bloc_routpage/src/DashBoard/presentation/pages/DetailPage.dart';
 import 'package:new_task_bloc_routpage/src/DashBoard/presentation/widgets/searchbar.dart';
 import 'package:new_task_bloc_routpage/src/DashBoard/presentation/widgets/tenantViewSwitch.dart';
-import 'package:new_task_bloc_routpage/src/PropertyRequest/data/data-Source/SeprateData.dart';
 
 @RoutePage()
 class DashBoard extends StatefulWidget {
@@ -15,7 +15,7 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   bool _switchValue = false;
-  int _selectedCategoryIndex = -1;
+  String _selectedCategory = 'All';
 
   @override
   Widget build(BuildContext context) {
@@ -47,26 +47,25 @@ class _DashBoardState extends State<DashBoard> {
             const SizedBox(
               height: 10,
             ),
-
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                  SatprateData.categories.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: FilterChip(
-                      label: Text(SatprateData.categories[index].name),
-                      selected: _selectedCategoryIndex == index,
-                      onSelected: (bool value) {
-                        setState(() {
-                          _selectedCategoryIndex = value ? index : -1;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ),
+            DropdownButton<String>(
+              value: _selectedCategory,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedCategory = newValue!;
+                });
+              },
+              items: <String>[
+                'All',
+                'Residential',
+                'PG',
+                'Villa',
+                'Service Apartment'
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
             ),
 
             const Align(
@@ -96,10 +95,127 @@ class _DashBoardState extends State<DashBoard> {
             const SizedBox(
               height: 10,
             ),
-            const FetchAvilablePropertys(),
+
+            // FETCHING AVAILABELE PROPERTY DATA
+
+            Expanded(
+              child: StreamBuilder(
+                stream: _selectedCategory == 'All'
+                    ? FirebaseFirestore.instance
+                        .collection('AvailablePropertys')
+                        .snapshots()
+                    : FirebaseFirestore.instance
+                        .collection('AvailablePropertys')
+                        .where('category', isEqualTo: _selectedCategory)
+                        .snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+                  if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            child: Image.asset('assets/images/delete_icon.png'),
+                          ),
+                          const Text('No Data Available'),
+                        ],
+                      ),
+                    );
+                  }
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // Number of items per row
+                      crossAxisSpacing:
+                          10, // Spacing between each item horizontally
+                      mainAxisSpacing:
+                          10, // Spacing between each row vertically
+                    ),
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      var data = snapshot.data!.docs[index].data()
+                          as Map<String, dynamic>;
+                      String category = data['category'];
+                      String imagePath = _getImagePathForCategory(category);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPage(propertyData: data),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          // elevation: 4,
+                          child: Stack(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(5),
+                                // height: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      5), // Adjust the border radius according to your needs
+                                  image: DecorationImage(
+                                    image: AssetImage(imagePath),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  color: Colors.black.withOpacity(
+                                      0.5), // Semi-transparent black background for better readability
+                                  child: Text(
+                                    '${data['category']} , ${data['type']} , ${data['transactionType']}',
+                                    style: const TextStyle(
+                                      color: Colors.white, // Text color
+                                      fontSize:
+                                          10, // Adjust font size as needed
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  String _getImagePathForCategory(String category) {
+    switch (category) {
+      case 'Residential':
+        return 'assets/Cetegory/home1.jpg';
+      case 'PG':
+        return 'assets/Cetegory/PG.jpeg';
+      case 'Villa':
+        return 'assets/Cetegory/Villa.jpeg';
+      case 'Service Apartment':
+        return 'assets/Cetegory/serviceapartment.jpeg';
+      // Add more cases for other categories
+      default:
+        return 'assets/images/default_image.jpg';
+    }
   }
 }
