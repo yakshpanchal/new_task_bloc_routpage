@@ -24,8 +24,8 @@ class CustomSwitch extends StatelessWidget {
           'Tenent View',
           style: TextStyle(
             fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold,
-            color: Colors.deepPurple,
+            // fontWeight: FontWeight.bold,
+            // color: Colors.deepPurple,
           ),
         )
       ],

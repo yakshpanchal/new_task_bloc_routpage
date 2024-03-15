@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
           body: child,
           bottomNavigationBar: ConvexAppBar(
             items: const [
-              TabItem(icon: Icons.dashboard, title: 'Dashboard'),
+              TabItem(icon: Icons.home, title: 'Dashboard'),
               TabItem(icon: Icons.add_box, title: 'Request'),
               TabItem(icon: Icons.person, title: 'Account'),
             ],
@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
             },
             color: Colors.white,
             activeColor: Colors.white,
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Color(0xFF1CB5B0),
           ),
         );
       },
