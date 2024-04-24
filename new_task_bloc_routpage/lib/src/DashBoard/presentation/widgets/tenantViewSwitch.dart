@@ -21,7 +21,7 @@ class CustomSwitch extends StatelessWidget {
           activeColor: Colors.green,
         ),
         const Text(
-          'Tenent View',
+          'Recommended Property Show',
           style: TextStyle(
             fontStyle: FontStyle.italic,
             // fontWeight: FontWeight.bold,

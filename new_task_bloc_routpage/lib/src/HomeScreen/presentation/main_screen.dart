@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
             },
             color: Colors.white,
             activeColor: Colors.white,
-            backgroundColor: Color(0xFF1CB5B0),
+            backgroundColor: const Color(0xFF1CB5B0),
           ),
         );
       },

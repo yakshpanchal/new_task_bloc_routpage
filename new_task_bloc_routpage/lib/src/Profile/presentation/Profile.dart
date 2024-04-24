@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_task_bloc_routpage/config/router/router.gr.dart';
+import 'package:new_task_bloc_routpage/src/subscription_management/presentation/pages/subscription_screen.dart';
 
 @RoutePage()
 class Profile extends StatefulWidget {
@@ -16,8 +17,10 @@ class _ProfileState extends State<Profile> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void _logout(BuildContext context) async {
     await _auth.signOut();
-    AutoRouter.of(context).pushAndPopUntil(Login(), predicate: (route) => false);
+    AutoRouter.of(context)
+        .pushAndPopUntil(Login(), predicate: (route) => false);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,19 +29,15 @@ class _ProfileState extends State<Profile> {
         actions: [
           Text('LogOut'),
           IconButton(
-            icon:  SizedBox(
-              height: 25,
-                child: Image.asset('assets/images/logout.png')),
+            icon: SizedBox(
+                height: 25, child: Image.asset('assets/images/logout.png')),
             onPressed: () => _logout(context),
           ),
         ],
       ),
-
       body: Center(
-        child: Text('Welcome to the Profile Screen!'),
+        child: SubscriptionScreen(),
       ),
-
     );
   }
-
 }

@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:new_task_bloc_routpage/config/Common/Widgets/Appbar.dart';
+import 'package:new_task_bloc_routpage/config/router/router.gr.dart';
 import 'package:new_task_bloc_routpage/src/DashBoard/data/ShowRecommendedProperties.dart';
 import 'package:new_task_bloc_routpage/src/DashBoard/presentation/pages/DetailPage.dart';
 import 'package:new_task_bloc_routpage/src/DashBoard/presentation/widgets/searchbar.dart';
@@ -22,34 +24,16 @@ class _DashBoardState extends State<DashBoard> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(30.0), // Adjust the radius as needed
-              bottomRight: Radius.circular(30.0), // Adjust the radius as needed
-            ),
-            child: AppBar(
-              title: const Center(
-                child: Text(
-                  'Rentl',
-                  style: TextStyle(
-                    color: Colors.white,
-                    letterSpacing: 3,
-                  ),
-                ),
-              ),
-              backgroundColor: Color(0xFF1CB5B0),
-              elevation:
-                  0, // Optional: Set elevation to 0 if you don't want a shadow
-            ),
-          ),
+        appBar: const CustomAppBar(
+          title: 'Rentl',
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              // custome switch //
+
               CustomSwitch(
                 value: _switchValue,
                 onChanged: (value) {
@@ -58,8 +42,11 @@ class _DashBoardState extends State<DashBoard> {
                   });
                 },
               ),
-              // search field
+
+              // search bar
+
               const CustomSearchField(),
+
               const SizedBox(
                 height: 10,
               ),
@@ -90,30 +77,43 @@ class _DashBoardState extends State<DashBoard> {
                       );
                     }).toList(),
                   ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  OutlinedButton(
+                      onPressed: () {
+                        AutoRouter.of(context).push(const FilterRoute());
+                      },
+                      child: const Text('Filter')),
                 ],
               ),
 
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Recommended Properties',
-                  style: TextStyle(
-                      // color: Colors.deepPurple,
-                      // fontWeight: FontWeight.bold,
-                      ),
-                ),
+              const Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Recommended Properties',
+                      style: TextStyle(
+                          // color: Colors.deepPurple,
+                          // fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ShowRecommendedProperties(),
+                ],
               ),
+
               const SizedBox(
                 height: 10,
               ),
-              const ShowRecommendedProperties(),
-              const SizedBox(
-                height: 10,
-              ),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Explore More Propertys',
+                  'Explore Propertys',
                   style: TextStyle(
                       // color: Colors.deepPurple,
                       // fontWeight: FontWeight.bold,

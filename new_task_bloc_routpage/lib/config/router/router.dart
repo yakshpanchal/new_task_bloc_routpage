@@ -14,6 +14,7 @@ class AppRouter extends $AppRouter {
           AutoRoute(page: PropertyRequest.page),
           AutoRoute(page: Profile.page)
         ]),
-        AutoRoute(page: ShowUserRequest.page)
+        AutoRoute(page: ShowUserRequest.page),
+        AutoRoute(page: FilterRoute.page),
       ];
 }

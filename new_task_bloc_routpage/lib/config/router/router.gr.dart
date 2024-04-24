@@ -9,14 +9,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i10;
-
 import 'package:new_task_bloc_routpage/src/authentication/presenatation/CheckisLoginOrNot.dart'
-    as _i2;
+    as _i1;
 import 'package:new_task_bloc_routpage/src/authentication/presenatation/Login.dart'
     as _i4;
 import 'package:new_task_bloc_routpage/src/authentication/presenatation/SignUp.dart'
     as _i9;
 import 'package:new_task_bloc_routpage/src/DashBoard/presentation/pages/DashBoard.dart'
+    as _i2;
+import 'package:new_task_bloc_routpage/src/FilterPropertyPage/presentation/pages/filterProperties.dart'
     as _i3;
 import 'package:new_task_bloc_routpage/src/HomeScreen/presentation/main_screen.dart'
     as _i5;
@@ -35,13 +36,19 @@ abstract class $AppRouter extends _i10.RootStackRouter {
     CheckLoginStatus.name: (routeData) {
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.CheckLoginStatus(),
+        child: const _i1.CheckLoginStatus(),
       );
     },
     DashBoard.name: (routeData) {
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.DashBoard(),
+        child: const _i2.DashBoard(),
+      );
+    },
+    FilterRoute.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i3.FilterPage(),
       );
     },
     Login.name: (routeData) {
@@ -84,21 +91,7 @@ abstract class $AppRouter extends _i10.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.AddNewAvailableProperty]
-class AddNewAvailableProperty extends _i10.PageRouteInfo<void> {
-  const AddNewAvailableProperty({List<_i10.PageRouteInfo>? children})
-      : super(
-          AddNewAvailableProperty.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AddNewAvailableProperty';
-
-  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i2.CheckLoginStatus]
+/// [_i1.CheckLoginStatus]
 class CheckLoginStatus extends _i10.PageRouteInfo<void> {
   const CheckLoginStatus({List<_i10.PageRouteInfo>? children})
       : super(
@@ -112,7 +105,7 @@ class CheckLoginStatus extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.DashBoard]
+/// [_i2.DashBoard]
 class DashBoard extends _i10.PageRouteInfo<void> {
   const DashBoard({List<_i10.PageRouteInfo>? children})
       : super(
@@ -121,6 +114,20 @@ class DashBoard extends _i10.PageRouteInfo<void> {
         );
 
   static const String name = 'DashBoard';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.FilterPage]
+class FilterRoute extends _i10.PageRouteInfo<void> {
+  const FilterRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          FilterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FilterRoute';
 
   static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }

@@ -49,6 +49,7 @@ dependencies:
   get_it: ^7.6.7
   provider: ^6.1.2
   injectable: ^2.3.5
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
