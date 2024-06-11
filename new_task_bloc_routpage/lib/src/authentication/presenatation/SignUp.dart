@@ -94,7 +94,6 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: 30,
                 ),
-
                 CustomTextFormFiled(
                   controller: _nameController,
                   labelText: "Enter your name",

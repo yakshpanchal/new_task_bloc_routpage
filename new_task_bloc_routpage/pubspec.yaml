@@ -51,6 +51,7 @@ dependencies:
   injectable: ^2.3.5
   carousel_slider: ^4.2.1
   image_picker: ^1.0.8
+  intl_phone_number_input: ^0.7.4
 
 dev_dependencies:
   flutter_test:
