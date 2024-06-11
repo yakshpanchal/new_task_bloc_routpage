@@ -22,7 +22,8 @@ class _ShowUserRequestState extends State<ShowUserRequest> {
           'Your Property Requests ',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.deepPurple,
+        // backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.grey.shade700,
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance

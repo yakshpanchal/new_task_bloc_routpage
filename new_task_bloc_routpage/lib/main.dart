@@ -14,7 +14,6 @@ void main() async{
   );
 }
 
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -26,9 +25,7 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     AppRouter appRouter = AppRouter();
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Application_Route_page',

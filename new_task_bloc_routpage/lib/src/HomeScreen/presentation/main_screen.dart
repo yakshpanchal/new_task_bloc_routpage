@@ -6,6 +6,7 @@ import '../../../config/router/router.gr.dart';
 
 @RoutePage()
 class MainScreen extends StatefulWidget {
+  
   const MainScreen({Key? key}) : super(key: key);
 
   @override
@@ -20,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
       routes: const [
         DashBoard(),
         PropertyRequest(),
+        SubscriptionRoute(),
         Profile(),
       ],
       builder: (context, child) {
@@ -30,6 +32,7 @@ class _MainScreenState extends State<MainScreen> {
             items: const [
               TabItem(icon: Icons.home, title: 'Dashboard'),
               TabItem(icon: Icons.add_box, title: 'Request'),
+              TabItem(icon: Icons.diamond_outlined, title: 'Plans'),
               TabItem(icon: Icons.person, title: 'Account'),
             ],
             height: 60,
@@ -39,7 +42,8 @@ class _MainScreenState extends State<MainScreen> {
             },
             color: Colors.white,
             activeColor: Colors.white,
-            backgroundColor: const Color(0xFF1CB5B0),
+            // backgroundColor: const Color(0xFF1CB5B0),
+            backgroundColor: Colors.grey.shade700,
           ),
         );
       },

@@ -31,6 +31,34 @@ class _PropertyRequestState extends State<PropertyRequest> {
   bool _isUploading = false;
   bool _isUploadingnewProperty = false;
 
+
+  String? _userRole; // Add a variable to store the user role
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserRole(); // Fetch the user role when the widget is initialized
+  }
+
+  // Fetch the user role from Firestore
+  Future<void> _fetchUserRole() async {
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      DocumentSnapshot userDoc = await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .get();
+
+      setState(() {
+        _userRole = userDoc['role']; // Assuming the role is stored in the 'role' field
+      });
+    } catch (e) {
+      print("Error fetching user role: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +79,8 @@ class _PropertyRequestState extends State<PropertyRequest> {
             ),
           ),
         ],
-        backgroundColor: Colors.deepPurple,
+        // backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.grey.shade700,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -280,7 +309,12 @@ class _PropertyRequestState extends State<PropertyRequest> {
                       });
                     },
                   ),
-                  const Text('Can Property Owners Contact You on Mobile ?'),
+                  const Text(
+                    'Can Property Owners Contact You on Mobile ?',
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -294,7 +328,10 @@ class _PropertyRequestState extends State<PropertyRequest> {
                       });
                     },
                   ),
-                  const Text('Can Property Owners Contact on WhatsApp ?'),
+                  const Text('Can Property Owners Contact on WhatsApp ?',
+                    style: TextStyle(
+                    fontSize: 12,
+                  ),),
                 ],
               ),
               const SizedBox(

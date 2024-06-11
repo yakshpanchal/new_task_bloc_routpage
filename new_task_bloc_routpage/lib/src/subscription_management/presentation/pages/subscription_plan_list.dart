@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:new_task_bloc_routpage/src/subscription_management/presentation/widgets/Info.dart';
 // import 'package:iq/features/subscription_management/presentation/widgets/Info.dart';
@@ -5,6 +6,7 @@ import 'package:new_task_bloc_routpage/src/subscription_management/presentation/
 
 import 'subscription_plan_details.dart';
 
+@RoutePage()
 class OwnerScreen extends StatelessWidget {
   const OwnerScreen({super.key, Key? context});
 

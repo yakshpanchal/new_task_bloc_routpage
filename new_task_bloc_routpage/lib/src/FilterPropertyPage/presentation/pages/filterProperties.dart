@@ -143,8 +143,8 @@ class _FilterPageState extends State<FilterPage> {
                                                 Text(
                                                   '${data['category']}',
                                                   style: const TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                                 const SizedBox(

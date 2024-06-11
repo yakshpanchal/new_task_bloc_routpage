@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:new_task_bloc_routpage/src/subscription_management/presentation/pages/subscription_plan_list.dart';
 // import 'package:iq/features/subscription_management/presentation/pages/subscription_plan_list.dart';
 // import 'package:iq/features/bottom_navigation_bar_management/presentation/temp/bottomnavigationbar.dart';
 
+@RoutePage()
 class SubscriptionScreen extends StatelessWidget {
   const SubscriptionScreen({Key? key});
 
@@ -17,19 +19,22 @@ class SubscriptionScreen extends StatelessWidget {
           title: const Text(
             'Subscription Plans',
             style: TextStyle(
-                fontSize: 24, fontWeight: FontWeight.w600, color: Colors.black),
-          ),
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
               color: Colors.black,
-              size: 30,
             ),
-            onPressed: () {
-              Navigator.of(context)
-                  .pop(); // Navigate back when the icon is pressed
-            },
           ),
+          // leading: IconButton(
+          //   icon: const Icon(
+          //     Icons.arrow_back,
+          //     color: Colors.black,
+          //     size: 30,
+          //   ),
+          //   onPressed: () {
+          //     Navigator.of(context)
+          //         .pop(); // Navigate back when the icon is pressed
+          //   },
+          // ),
         ),
         body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -56,7 +61,7 @@ class SubscriptionScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                margin: const EdgeInsets.all(15),
+                margin: const EdgeInsets.all(10),
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
@@ -74,11 +79,12 @@ class SubscriptionScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Image.asset(
-                        "assets/images/diamond.png",
-                        height: 30,
-                        width: 30,
-                      )
+                      Icon(Icons.diamond_outlined),
+                      // Image.asset(
+                      //   "assets/images/diamond.png",
+                      //   height: 30,
+                      //   width: 30,
+                      // )
                     ],
                   ),
                 ),

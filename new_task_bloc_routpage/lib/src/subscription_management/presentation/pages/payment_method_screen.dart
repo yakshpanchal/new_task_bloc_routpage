@@ -1,11 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:new_task_bloc_routpage/src/subscription_management/presentation/widgets/CongratulationScreen.dart';
 import 'package:new_task_bloc_routpage/src/subscription_management/presentation/widgets/Info.dart';
 import 'package:new_task_bloc_routpage/src/subscription_management/presentation/widgets/PaymentFailed.dart';
+
 // import 'package:iq/features/subscription_management/presentation/widgets/CongratulationScreen.dart';
 // import 'package:iq/features/subscription_management/presentation/widgets/Info.dart';
 // import 'package:iq/features/subscription_management/presentation/widgets/PaymentFailed.dart';
-
+@RoutePage()
 class PaymentMethod extends StatelessWidget {
   const PaymentMethod({super.key});
 

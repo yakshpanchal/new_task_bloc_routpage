@@ -1,12 +1,13 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:new_task_bloc_routpage/src/subscription_management/presentation/pages/payment_method_screen.dart';
 // import 'package:iq/features/subscription_management/presentation/pages/payment_method_screen.dart';
 
 // Import other necessary packages
-
+@RoutePage()
 class SubscriptionPlanDetails extends StatelessWidget {
   const SubscriptionPlanDetails({Key? key});
 
@@ -17,14 +18,15 @@ class SubscriptionPlanDetails extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Row(
+        title: const Row(
           children: [
-            Image.asset(
-              "assets/images/diamond.png",
-              height: 35,
-              width: 35,
-            ),
-            const Text(
+            // Image.asset(
+            //   "assets/images/diamond.png",
+            //   height: 35,
+            //   width: 35,
+            // ),
+            Icon(Icons.diamond_outlined),
+            Text(
               "Subscription plans",
               style: TextStyle(
                 fontSize: 24,
@@ -32,11 +34,12 @@ class SubscriptionPlanDetails extends StatelessWidget {
                 color: Color(0xFF263A43),
               ),
             ),
-            Image.asset(
-              "assets/images/diamond.png",
-              height: 35,
-              width: 35,
-            ),
+            Icon(Icons.diamond_outlined),
+            // Image.asset(
+            //   "assets/images/diamond.png",
+            //   height: 35,
+            //   width: 35,
+            // ),
           ],
         ),
         leading: IconButton(
@@ -67,8 +70,7 @@ class SubscriptionPlanDetails extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-              child: CarouselSlider(
+          CarouselSlider(
             options: CarouselOptions(
               aspectRatio: 2.0,
               enlargeCenterPage: true,
@@ -76,22 +78,23 @@ class SubscriptionPlanDetails extends StatelessWidget {
               autoPlay: true,
             ),
             items: List.empty(),
-          )),
+          ),
           const SizedBox(
             height: 20,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/images/ConeLeft.png",
-                height: 15,
-                width: 15,
-              ),
-              const SizedBox(
+              // Image.asset(
+              //   "assets/images/ConeLeft.png",
+              //   height: 15,
+              //   width: 15,
+              // ),
+              Icon(Icons.diamond_outlined),
+              SizedBox(
                 width: 10,
               ),
-              const Text(
+              Text(
                 "Plans Benefits",
                 style: TextStyle(
                   fontSize: 16,
@@ -99,14 +102,15 @@ class SubscriptionPlanDetails extends StatelessWidget {
                   color: Color(0xFF35343F),
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 10,
               ),
-              Image.asset(
-                "assets/images/ConeRight.png",
-                height: 15,
-                width: 15,
-              ),
+              // Image.asset(
+              //   "assets/images/ConeRight.png",
+              //   height: 15,
+              //   width: 15,
+              // ),
+              Icon(Icons.diamond_outlined),
             ],
           ),
           Expanded(
@@ -173,7 +177,7 @@ class MyCard extends StatelessWidget {
                           : const Icon(Icons.close,
                               size: 18.0, color: Colors.red),
                       const SizedBox(width: 8.0),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Expanded(
@@ -202,7 +206,7 @@ class MyCard extends StatelessWidget {
             child: Container(
               height: 20,
               width: 20,
-              color: Colors.red,
+              // color: Colors.red,
             ),
           ),
         ],
